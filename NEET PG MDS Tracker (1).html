@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080c18">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NEET PG MDS">
+<title>NEET PG MDS Tracker</title>
+<style>
+:root{--tx:#eef2fb;--mu:#93a0bd;--ac:#7cc4ff;--ac2:#a78bfa;--bd:rgba(255,255,255,.09);--ok:#3de0a5;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{background:#080c18}
+body{margin:0;min-height:100%;color:var(--tx);font:15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(900px 500px at 90% -5%,rgba(124,196,255,.2),transparent 60%),radial-gradient(700px 500px at -10% 35%,rgba(167,139,250,.2),transparent 60%),radial-gradient(600px 400px at 100% 95%,rgba(255,150,200,.12),transparent 60%),linear-gradient(180deg,#080c18,#0d1226 60%,#080c18);background-attachment:fixed}
+main{max-width:640px;margin:0 auto;padding:18px 16px 40px}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px;margin-bottom:14px;border-radius:22px;background:linear-gradient(135deg,rgba(124,196,255,.18),rgba(167,139,250,.14));border:1px solid var(--bd);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+h1{font-size:24px;margin:0;background:linear-gradient(90deg,#fff,var(--ac));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mu);font-size:12.5px;margin-top:4px}
+.ring{width:88px;height:88px;border-radius:50%;flex:none;display:grid;place-items:center;background:conic-gradient(var(--ok) calc(var(--p,0)*1%),rgba(255,255,255,.08) 0)}
+.ring div{width:70px;height:70px;border-radius:50%;background:#0d1226;display:grid;place-items:center;text-align:center;font-weight:700;font-size:17px;line-height:1.1}
+.ring small{display:block;font-size:9px;font-weight:500;color:var(--mu)}
+.card{background:rgba(255,255,255,.055);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--bd);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:0 8px 30px rgba(0,0,0,.28)}
+h2{font-size:12px;margin:0 0 12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--ac);font-weight:600}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}
+label{display:block;font-size:12px;color:var(--mu);margin-bottom:4px}
+input,select{width:100%;padding:11px;border:1px solid var(--bd);border-radius:12px;background:rgba(0,0,0,.3);color:var(--tx);font-size:16px}
+button{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#071225;border:0;border-radius:14px;padding:12px;font-size:16px;font-weight:700;width:100%;box-shadow:0 6px 20px rgba(124,196,255,.22)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.st{background:rgba(0,0,0,.25);border:1px solid var(--bd);border-radius:14px;padding:10px 6px;text-align:center}
+.st b{display:block;font-size:18px}.st span{font-size:11px;color:var(--mu)}
+.q{font-size:16px;line-height:1.5;font-style:italic}
+.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd)}
+.row:last-child{border:0}.row .t{flex:1;min-width:0;overflow-wrap:anywhere}.row .t small{display:block;color:var(--mu)}
+.chip{font-size:11px;padding:2px 8px;border-radius:12px;background:rgba(124,196,255,.15);color:var(--ac)}
+.x{width:auto;padding:4px 9px;font-size:12px;background:rgba(255,120,120,.18);color:#ff9a9a;box-shadow:none;border-radius:8px}
+.row input[type=checkbox]{width:22px;height:22px;accent-color:#3de0a5;flex:none}
+.done .t b{text-decoration:line-through;color:var(--mu)}
+.bar{height:7px;background:rgba(255,255,255,.08);border-radius:6px;overflow:hidden;margin:4px 0 10px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+a.btn{display:block;text-align:center;text-decoration:none;background:linear-gradient(135deg,#34a853,#4285f4);color:#fff;border-radius:14px;padding:12px;font-weight:700;margin-top:10px}
+a.o{color:var(--ac);text-decoration:none;font-size:13px}
+.pop{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(3,6,14,.8);backdrop-filter:blur(6px)}.pop.on{display:flex}
+.pc{max-width:340px;width:100%;text-align:center;padding:24px 20px;border-radius:26px;background:linear-gradient(160deg,rgba(124,196,255,.22),rgba(255,150,200,.2));border:1px solid var(--bd);box-shadow:0 20px 60px rgba(0,0,0,.6);animation:pp .5s cubic-bezier(.2,1.4,.4,1)}
+.pc h3{margin:0 0 10px;font-size:18px}.pc p{font-size:17px;font-style:italic;line-height:1.5;margin:0 0 16px}
+#cf{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+#cf i{position:absolute;top:-24px;width:9px;height:15px;border-radius:2px;animation:fall linear forwards}
+.pc{position:relative;z-index:2}.pc h3.big{font-size:28px;background:linear-gradient(90deg,#c9a8ff,#ff9ed2);-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes fall{to{transform:translateY(115vh) rotate(720deg)}}
+@keyframes pp{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+input.ed{background:transparent;border:1px dashed transparent;padding:6px 8px;font-weight:600}input.ed:focus{border-color:var(--ac);background:rgba(0,0,0,.3);outline:none}.done input.ed{text-decoration:line-through;color:var(--mu)}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.nav{width:44px;padding:0;font-size:22px;line-height:1}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal .h{font-size:10px;color:var(--mu);text-align:center}
+.cal .d{aspect-ratio:1;border-radius:10px;background:rgba(0,0,0,.25);border:1px solid var(--bd);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;cursor:pointer;color:var(--tx);padding:0;min-height:0;width:auto;font-weight:500;box-shadow:none}
+.cal .d small{font-size:10px;font-weight:700;color:var(--ac)}
+.cal .d.ok{background:rgba(61,224,165,.28);border-color:var(--ok)}.cal .d.ok small{color:var(--ok)}
+.cal .d.part{background:rgba(124,196,255,.2)}
+.cal .d.off{opacity:.25;pointer-events:none}
+.cal .d.today{outline:2px solid var(--ac2)}.cal .d.sel{box-shadow:inset 0 0 0 2px #fff}
+svg{width:100%;height:auto;display:block}
+body{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;overscroll-behavior-y:none}
+button,select,input,a.btn{min-height:44px;touch-action:manipulation}
+input[type=checkbox]{min-height:0}
+main{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+@media (min-width:760px){
+ main{max-width:1000px;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;padding-top:26px}
+ main>.card,main>.hero{margin:0}.hero{grid-column:1/-1}
+ h1{font-size:30px}.ring{width:110px;height:110px}.ring div{width:88px;height:88px;font-size:22px}
+ .q{font-size:18px}body{font-size:16px}
+}
+@media (min-width:1100px){main{max-width:1180px}}
+</style></head><body><main>
+
+<div class="hero"><div><h1>NEET PG MDS Tracker</h1><div class="sub" id="cd">Set your exam date below</div><div class="sub">Daily target: 10 pages 💪</div></div>
+<div class="ring" id="ring"><div><span id="rv">0/10<small>pages today</small></span></div></div></div>
+
+<div class="card"><h2>💜 Today's motivation</h2><div class="q" id="quote"></div></div>
+
+<div class="card"><h2>Log pages</h2><div class="grid">
+<div><label>Subject</label><select id="ls"></select></div>
+<div><label>Pages completed</label><input type="number" id="lp" min="1" inputmode="numeric" placeholder="e.g. 5"></div>
+<div class="full"><label>Date</label><input type="date" id="ld" min="2026-09-24"></div>
+<div class="full"><label>Topic (optional)</label><input id="lt" list="tlist" placeholder="Type any topic or pick from your list" autocomplete="off"><datalist id="tlist"></datalist></div></div>
+<button id="lb" style="margin-top:12px">Add pages</button>
+<div class="stats" style="margin-top:14px" id="stats"></div></div>
+
+<div class="card"><h2>📅 Calendar</h2>
+<div class="cal-h"><button class="nav" id="cp" aria-label="Previous month">‹</button><b id="cm"></b><button class="nav" id="cn" aria-label="Next month">›</button></div>
+<div class="cal" id="cal"></div>
+<div class="sub" style="display:flex;gap:12px;margin:8px 0"><span><b style="color:var(--ok)">■</b> 10+ pages</span><span><b style="color:var(--ac)">■</b> some pages</span><span>Tracking starts 24 Sep</span></div>
+<div id="cdet"></div></div>
+<div class="card"><h2>Pages completed · since 24 Sep</h2><div class="stats" id="pst" style="margin-bottom:10px"></div><div id="pg"></div></div>
+<div class="card"><h2>Last 14 days</h2><div id="chart"></div></div>
+
+<div class="card"><h2>Topics covered</h2><div id="sp"></div>
+<div class="grid" style="margin-top:6px"><div><label>Subject</label><select id="ts"></select></div>
+<div><label>Topic / chapter</label><input id="tn" placeholder="e.g. Laws of Motion"></div></div>
+<button id="tb" style="margin-top:12px">Add topic</button><div id="tl" style="margin-top:8px"></div></div>
+
+<div class="card"><h2>☁️ Google Drive & references</h2>
+<label>Your Drive folder link (notes, topics, PDFs)</label><input id="dv" placeholder="https://drive.google.com/…">
+<div id="dvb"></div>
+<div class="sub">Upload your files to Drive, then paste each file's link below to keep them in one place.</div>
+<div class="grid" style="margin-top:10px"><div class="full"><label>Document title</label><input id="rt" placeholder="e.g. NCERT Biology Ch 5 notes"></div>
+<div class="full"><label>Link</label><input id="ru" placeholder="https://…"></div></div>
+<button id="rb" style="margin-top:12px">Save reference</button><div id="rl" style="margin-top:8px"></div></div>
+
+<div class="card"><h2>Exam date</h2><input type="date" id="ed"></div>
+
+<div class="pop" id="pop"><div id="cf"></div><div class="pc"><h3 id="pt"></h3><p id="pq"></p><button id="pc">Let's go 🚀</button></div></div>
+</main>
+<script>
+const $=id=>document.getElementById(id),KEY='neet-tracker-v1',T=10;
+const Q=["Ten pages today is a small promise to your future self. Keep it, and the doctor in you grows.","A good partner loves your dreams. Study today so tomorrow's celebration is twice as sweet.","Wedding plans and exam plans can share a calendar. Give each its hour, and give both your best.","You don't need a perfect day, just ten honest pages.","The white coat and the wedding day are both built one steady step at a time.","Balance isn't doing everything at once; it's giving full attention to what's in front of you now.","On the tired days, remember why you started. Then read one more page.","Someone believes in you. Make your effort worthy of that belief.","Marriage will walk with you; the exam will not wait. Use today well.","Consistency beats intensity. Ten pages, every single day.","Your partner's support plus your discipline is an unbeatable team.","Every topic you finish is one less worry on the exam hall morning.","Plan the day, protect your study hours, then enjoy your evening guilt-free.","Dreams this big ask for daily courage, not occasional bursts.","Revise like you're already a doctor and love like you're already home.","Small pages, big future. Don't skip today.","Talk to your loved ones, then focus fully. Both deserve your presence.","You are allowed to want a career and a family. You are strong enough for both.","Progress, not perfection. Mark one more topic as covered.","The version of you who passes NEET is made by today's effort.","Be patient with the journey. Exams, weddings and dreams all come right on time."];
+let S={exam:'',drive:'',topics:[],logs:[],refs:[],q:''};
+try{S={...S,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const MIN='2026-09-24';let selD='',calY=2026,calM=8;
+const day=d=>d.toLocaleDateString('en-CA'),today=()=>day(new Date());
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const url=u=>/^https?:\/\//i.test(u)?u:(u?'https://'+u:'');
+const GR=[['NEET PG (MDS)',['Dental Anatomy & Histology','Oral Pathology','Oral Medicine & Radiology','Periodontology','Conservative & Endodontics','Prosthodontics','Oral & Maxillofacial Surgery','Orthodontics','Pedodontics','Public Health Dentistry','Dental Materials','General Anatomy','General Physiology & Biochemistry','General Pathology & Microbiology','Pharmacology','General Medicine & Surgery']]];
+const SUB=GR.flatMap(g=>g[1]),OPTS=GR.map(g=>`<optgroup label="${g[0]}">${g[1].map(x=>`<option>${esc(x)}</option>`).join('')}</optgroup>`).join('');
+$('ls').innerHTML=OPTS;$('ts').innerHTML=OPTS;
+const pagesOn=d=>S.logs.filter(l=>l.d===d).reduce((a,l)=>a+l.p,0);
+const quote=()=>{const n=new Date(),i=Math.floor((n-new Date(n.getFullYear(),0,0))/864e5);return Q[i%Q.length]};
+function show(h,q){if(!/^That/.test(h)){$('pt').className='';$('cf').innerHTML=''}$('pt').textContent=h;$('pq').textContent=q;$('pop').classList.add('on')}
+$('pc').onclick=()=>{$('pop').classList.remove('on');$('cf').innerHTML=''};
+function party(d){$('pt').className='big';show("That's my girl 💜",(d===today()?"10 pages done today":"10 pages done for "+d)+" — you're unstoppable! 🎉");
+ const C=['#ff9ed2','#c9a8ff','#7cc4ff','#3de0a5','#ffd166','#ff7a7a'];let h='';
+ for(let i=0;i<90;i++)h+=`<i style="left:${Math.random()*100}%;background:${C[i%6]};animation-duration:${2.5+Math.random()*3}s;animation-delay:${Math.random()*1.2}s;transform:rotate(${Math.random()*360}deg)"></i>`;
+ $('cf').innerHTML=h}
+$('lb').onclick=()=>{const p=+$('lp').value;if(!(p>0))return;const dd=$('ld').value;if(!dd||dd<MIN)return alert('Pick a date from 24 Sep 2026 onwards');const before=pagesOn(dd);
+ S.logs.push({d:dd,s:$('ls').value,t:$('lt').value.trim(),p});save();selD=dd;calY=+dd.slice(0,4);calM=+dd.slice(5,7)-1;$('lp').value=$('lt').value='';render();
+ if(before<T&&pagesOn(dd)>=T)party(dd)};
+$('tb').onclick=()=>{const n=$('tn').value.trim();if(!n)return;S.topics.push({id:Date.now(),s:$('ts').value,n,done:false});$('tn').value='';save();render()};
+$('rb').onclick=()=>{const t=$('rt').value.trim(),u=url($('ru').value.trim());if(!t||!u)return;S.refs.push({t,u});$('rt').value=$('ru').value='';save();render()};
+$('cp').onclick=()=>{if(calY===2026&&calM<=8)return;calM--;if(calM<0){calM=11;calY--}render()};
+$('cn').onclick=()=>{calM++;if(calM>11){calM=0;calY++}render()};
+const pad=n=>String(n).padStart(2,'0'),MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function calR(){
+ const t=today(),dim=new Date(calY,calM+1,0).getDate(),off=(new Date(calY,calM,1).getDay()+6)%7;let mt=0,h='';
+ ['M','T','W','T','F','S','S'].forEach(x=>h+=`<div class="h">${x}</div>`);for(let i=0;i<off;i++)h+='<div></div>';
+ for(let d=1;d<=dim;d++){const k=`${calY}-${pad(calM+1)}-${pad(d)}`,pg=pagesOn(k);mt+=pg;
+  h+=`<button class="d ${k<MIN?'off':''} ${pg>=T?'ok':pg>0?'part':''} ${k===t?'today':''} ${k===selD?'sel':''}" data-k="${k}">${d}${pg?`<small>${pg}</small>`:''}</button>`}
+ $('cal').innerHTML=h;$('cm').textContent=MN[calM]+' '+calY+' · '+mt+' pg';
+ $('cal').querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{selD=b.dataset.k;$('ld').value=selD;render()});
+ const es=S.logs.map((l,i)=>[l,i]).filter(x=>x[0].d===selD);
+ $('cdet').innerHTML=selD?`<div class="sub" style="margin-bottom:4px"><b>${selD}</b> — ${pagesOn(selD)}/${T} pages</div>`+(es.map(([l,i])=>`<div class="row"><div class="t"><b>${l.p} pages</b><small>${esc(l.s)}${l.t?' · '+esc(l.t):''}</small></div><button class="x" data-ld="${i}">✕</button></div>`).join('')||'<div class="sub">Nothing logged. Use the form above to add pages for this day.</div>'):'<div class="sub">Tap a day to see or add its pages.</div>';
+ $('cdet').querySelectorAll('[data-ld]').forEach(b=>b.onclick=()=>{S.logs.splice(+b.dataset.ld,1);save();render()})}
+function pgR(){
+ const t=today(),last=S.logs.reduce((m,l)=>l.d>m?l.d:m,t),end=last<MIN?MIN:last,ds=[];
+ for(let d=new Date(2026,8,24);day(d)<=end;d.setDate(d.getDate()+1))ds.push(day(d));
+ const v=ds.map(pagesOn);let c=0;const cu=v.map(x=>c+=x),n=ds.length,tot=c,act=v.filter(x=>x>0).length;
+ $('pst').innerHTML=[[tot,'Total pages'],[act?Math.round(tot/act):0,'Avg / active day'],[Math.max(0,...v),'Best day']].map(x=>`<div class="st"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
+ if(n<2||tot===0){$('pg').innerHTML='<div class="sub">Log pages to see your progress graph.</div>';return}
+ const W=320,H=170,p=28,mb=Math.max(T,...v)*1.1,mc=Math.max(1,tot)*1.05,x=i=>p+i*(W-p*2)/(n-1),bw=Math.max(1.5,(W-p*2)/n*.7),yb=a=>H-p-a/mb*(H-p*1.8),yc=a=>H-p-a/mc*(H-p*1.8);
+ $('pg').innerHTML=`<svg viewBox="0 0 ${W} ${H}">${v.map((a,i)=>a?`<rect x="${x(i)-bw/2}" y="${yb(a)}" width="${bw}" height="${H-p-yb(a)}" fill="${a>=T?'var(--ok)':'var(--ac)'}" opacity=".85"/>`:'').join('')}<line x1="${p}" x2="${W-p}" y1="${yb(T)}" y2="${yb(T)}" stroke="#ffd166" stroke-dasharray="4 3"/><path d="${cu.map((a,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+yc(a).toFixed(1)).join('')}" fill="none" stroke="#ff8fab" stroke-width="2"/><text x="2" y="12" font-size="10" fill="var(--mu)">${Math.round(mb)} pg/day</text><text x="${W-2}" y="12" font-size="10" text-anchor="end" fill="var(--mu)">${tot} total</text><text x="${p}" y="${H-6}" font-size="10" fill="var(--mu)">${ds[0].slice(5)}</text><text x="${W-p}" y="${H-6}" font-size="10" text-anchor="end" fill="var(--mu)">${ds[n-1].slice(5)}</text></svg><div class="sub" style="display:flex;gap:14px"><span><b style="color:var(--ac)">■</b> Pages per day</span><span><b style="color:#ff8fab">●</b> Total so far</span><span><b style="color:#ffd166">┄</b> 10 target</span></div>`}
+$('dv').onchange=()=>{S.drive=$('dv').value.trim();save();render()};
+$('ed').onchange=()=>{S.exam=$('ed').value;save();render()};
+function render(){
+ const t=today(),tp=pagesOn(t);
+ $('ring').style.setProperty('--p',Math.min(100,tp/T*100));$('rv').innerHTML=tp+'/'+T+'<small>pages today</small>';
+ $('quote').textContent='“'+quote()+'”';
+ if(S.exam){const dl=Math.ceil((new Date(S.exam)-new Date(t))/864e5);$('cd').textContent=dl>0?dl+' days to NEET PG':dl==0?'Exam day — all the best!':'Exam date passed'}
+ $('ed').value=S.exam;$('dv').value=S.drive;
+ const tot=S.logs.reduce((a,l)=>a+l.p,0);let st=0,d=new Date();if(pagesOn(day(d))<T)d.setDate(d.getDate()-1);while(pagesOn(day(d))>=T){st++;d.setDate(d.getDate()-1)}
+ const days=[...new Set(S.logs.map(l=>l.d))],hit=days.filter(x=>pagesOn(x)>=T).length;
+ $('stats').innerHTML=[[tot,'Total pages'],[st+' 🔥','Day streak'],[hit,'Days hit 10']].map(x=>`<div class="st"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
+ calR();pgR();
+ // chart
+ const W=320,H=150,p=24,ds=[];for(let i=13;i>=0;i--){const x=new Date();x.setDate(x.getDate()-i);ds.push(day(x))}
+ const vs=ds.map(pagesOn),mx=Math.max(T,...vs)*1.15,bw=(W-p*1.5)/14,y=v=>H-p-v/mx*(H-p*1.8);
+ $('chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}">${vs.map((v,i)=>`<rect x="${p+i*bw+bw*.15}" y="${y(v)}" width="${bw*.7}" height="${H-p-y(v)}" rx="2" fill="${v>=T?'var(--ok)':'var(--ac)'}" opacity=".9"/>`).join('')}<line x1="${p}" x2="${W-4}" y1="${y(T)}" y2="${y(T)}" stroke="#ffd166" stroke-dasharray="4 3"/><text x="${W-4}" y="${y(T)-3}" font-size="9" text-anchor="end" fill="#ffd166">10 pages</text><text x="${p}" y="${H-6}" font-size="10" fill="var(--mu)">${ds[0].slice(5)}</text><text x="${W-4}" y="${H-6}" font-size="10" text-anchor="end" fill="var(--mu)">${ds[13].slice(5)}</text></svg>`;
+ // topics
+ $('tlist').innerHTML=S.topics.map(x=>`<option value="${esc(x.n)}">`).join('');
+ $('sp').innerHTML=SUB.map(s=>{const a=S.topics.filter(x=>x.s===s),c=a.filter(x=>x.done).length;if(!a.length)return '';return `<div style="display:flex;justify-content:space-between;font-size:13px"><span>${s}</span><span style="color:var(--mu)">${c}/${a.length} topics</span></div><div class="bar"><i style="width:${a.length?c/a.length*100:0}%"></i></div>`}).join('')||'<div class="sub">Add topics to see progress for each subject.</div>';
+ $('tl').innerHTML=S.topics.map(x=>`<div class="row ${x.done?'done':''}"><input type="checkbox" data-t="${x.id}" ${x.done?'checked':''}><div class="t"><input class="ed" data-e="${x.id}" value="${esc(x.n)}" aria-label="Edit topic"></div><span class="chip">${x.s}</span><button class="x" data-dt="${x.id}">✕</button></div>`).join('')||'<div class="sub">No topics yet — add the chapters you plan to cover.</div>';
+ $('tl').querySelectorAll('[data-t]').forEach(c=>c.onchange=()=>{const o=S.topics.find(x=>x.id==c.dataset.t);o.done=c.checked;save();render()});
+ $('tl').querySelectorAll('[data-e]').forEach(i=>i.onchange=()=>{const o=S.topics.find(x=>x.id==i.dataset.e),v=i.value.trim();if(!v){i.value=o.n;return}S.logs.forEach(l=>{if(l.t===o.n)l.t=v});o.n=v;save();render()});
+ $('tl').querySelectorAll('[data-dt]').forEach(b=>b.onclick=()=>{S.topics=S.topics.filter(x=>x.id!=b.dataset.dt);save();render()});
+ // drive/refs
+ $('dvb').innerHTML=S.drive?`<a class="btn" target="_blank" rel="noopener" href="${esc(url(S.drive))}">Open my Google Drive folder</a>`:'';
+ $('rl').innerHTML=S.refs.map((r,i)=>`<div class="row"><div class="t"><b>${esc(r.t)}</b><small><a class="o" target="_blank" rel="noopener" href="${esc(r.u)}">Open ↗</a></small></div><button class="x" data-r="${i}">✕</button></div>`).join('');
+ $('rl').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{S.refs.splice(+b.dataset.r,1);save();render()});
+}
+try{const c=document.createElement('canvas');c.width=c.height=180;const g=c.getContext('2d'),gr=g.createLinearGradient(0,0,180,180);gr.addColorStop(0,'#7cc4ff');gr.addColorStop(1,'#a78bfa');g.fillStyle=gr;g.fillRect(0,0,180,180);g.font='100px serif';g.textAlign='center';g.textBaseline='middle';g.fillText('🦷',90,98);
+ const ic=c.toDataURL('image/png'),l=document.createElement('link');l.rel='apple-touch-icon';l.href=ic;document.head.appendChild(l);
+ const m=document.createElement('link');m.rel='manifest';m.href=URL.createObjectURL(new Blob([JSON.stringify({name:'NEET PG MDS Tracker',short_name:'NEET PG MDS',display:'standalone',orientation:'any',background_color:'#080c18',theme_color:'#080c18',start_url:location.href,icons:[{src:ic,sizes:'180x180',type:'image/png'}]})],{type:'application/manifest+json'}));document.head.appendChild(m)}catch(e){}
+{const t0=today()<MIN?MIN:today();$('ld').value=t0;selD=t0;calY=+t0.slice(0,4);calM=+t0.slice(5,7)-1}
+render();
+if(S.q!==today()){S.q=today();save();show("🌅 Good day, future MDS specialist!",quote())}
+</script></body></html>
